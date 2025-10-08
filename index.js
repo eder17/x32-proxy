@@ -70,10 +70,10 @@ for (const [type, constructor, defaultPort] of [
     const url = new URL(`fake-protocol://${host || '127.0.0.1'}`);
     servers.add(
       new constructor({
-        target: argv.target,
+        target: argv.target.replace(/[\[\]]/g, ""),
         targetPort: argv.targetPort,
         port: url.port || defaultPort,
-        address: url.hostname
+        address: url.hostname.replace(/[\[\]]/g, "")
       })
     );
   }
